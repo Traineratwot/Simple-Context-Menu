@@ -60,7 +60,7 @@ class SCM {
 			console.warn('меню не обнаружено попробуйте добавить саписок либо вызвать функуцию init()');
 			return true;
 		}
-		if(event){
+		if(!$.isEmptyObject(event)){
 			this.event = event
 		}
 		this.AnyValue = AnyValue
