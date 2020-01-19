@@ -37,9 +37,9 @@ self это обект класса SCM в котором по мимо проч
 self.event это event который передался в класс при вызове show()
 ```js
 $('#test').on('click',
-function (event) {
-MyMeny.show(event);
-}
+	function (event) {
+		MyMeny.show(event);
+	}
 )
 ```
  AnyValue Это ваша пременная 
