@@ -27,14 +27,14 @@ $('#test').on('click',
   }
 )
 ```
-Подробнее о стрктуре
+Подробнее о стрктуре,<br>
 это ваша функция в которая будет исполнаться при клике по соответсвующему пункту меню
 ```js
 function (e,self,AnyValue){}
 ```
-e - это event нажатия на пункт меню
-self это обект класса SCM в котором по мимо прочего есть self.event
-self.event это event который передался в класс при вызове show()
+e - это event нажатия на пункт меню<br>
+self это обект класса SCM в котором по мимо прочего есть self.event<br>
+self.event это event который передался в класс при вызове show()<br>
 ```js
 $('#test').on('click',
 	function (event) {
@@ -42,7 +42,7 @@ $('#test').on('click',
 	}
 )
 ```
- AnyValue Это ваша пременная 
+ AnyValue Это ваша пременная, <br>
  пример использования 
  ```html
  <input type="text" oncontextmenu="test.show(event,$(this).val());return false">
