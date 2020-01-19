@@ -4,7 +4,7 @@
 class SCM {
 
 	constructor(list = []) {
-		document.addEventListener('mousemove', this.Mouse, false);
+
 		this.list = list;
 		this.menu;
 		this.ul
@@ -12,6 +12,10 @@ class SCM {
 		if (this.list) {
 			this.init()
 		}
+		var self = this;
+		$(document).on('mousemove',function (event) {
+			self.Mouse(event)
+		})
 	}
 	Mouse(e){
 		this.event = e;
@@ -65,8 +69,8 @@ class SCM {
 		}
 		this.AnyValue = AnyValue
 		this.menu.offset({
-			top: event.pageY,
-			left: event.pageX
+			top: this.event.pageY,
+			left: this.event.pageX
 		});
 		this.menu.fadeIn();
 		
