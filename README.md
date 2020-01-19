@@ -35,13 +35,13 @@ function (e,self,AnyValue){}
 e - это event нажатия на пункт меню
 self это обект класса SCM в котором по мимо прочего есть self.event
 self.event это event который передался в класс при вызове show()
-      ```js
-      $('#test').on('click',
-        function (event) {
-          MyMeny.show(event);
-        }
-      )
-      ```
+```js
+$('#test').on('click',
+function (event) {
+MyMeny.show(event);
+}
+)
+```
  AnyValue Это ваша пременная 
  пример использования 
  ```html
