@@ -14,7 +14,7 @@ class SCM {
 		}
 	}
 	Mouse(e){
-		this.event = e
+		this.event = e;
 	}
 	addItem(item = {}){
 		this.list.push(item);
@@ -59,6 +59,7 @@ class SCM {
 		if (!this.menu) {
 			console.warn('меню не обнаружено попробуйте добавить саписок либо вызвать функуцию init()');
 			return true;
+		}
 		if(event){
 			this.event = event
 		}
