@@ -4,6 +4,7 @@
 class SCM {
 
 	constructor(list = []) {
+		document.addEventListener('mousemove', this.Mouse, false);
 		this.list = list;
 		this.menu;
 		this.ul
@@ -11,6 +12,9 @@ class SCM {
 		if (this.list) {
 			this.init()
 		}
+	}
+	Mouse(e){
+		this.event = e
 	}
 	addItem(item = {}){
 		this.list.push(item);
@@ -55,8 +59,9 @@ class SCM {
 		if (!this.menu) {
 			console.warn('меню не обнаружено попробуйте добавить саписок либо вызвать функуцию init()');
 			return true;
+		if(event){
+			this.event = event
 		}
-		this.event = event
 		this.AnyValue = AnyValue
 		this.menu.offset({
 			top: event.pageY,
