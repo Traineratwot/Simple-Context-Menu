@@ -3,8 +3,10 @@
 // ]
 class SCM {
 
-	constructor(list = []) {
-
+	constructor(list = [], position = null) {
+		if (position) {
+			this.position = position;
+		}
 		this.list = list;
 		this.menu;
 		this.ul;
@@ -55,6 +57,12 @@ class SCM {
 		}
 		$('body').append(this.menu);
 	}
+	position(self, event, AnyValue) {
+		this.menu.offset({
+			top: this.event.pageY,
+			left: this.event.pageX
+		});
+	}
 	show(event, AnyValue = {}) {
 		var self = this;
 		if (!this.menu) {
@@ -65,14 +73,12 @@ class SCM {
 			this.event = event;
 		}
 		this.AnyValue = AnyValue;
-		this.menu.offset({
-			top: this.event.pageY,
-			left: this.event.pageX
-		});
-		this.menu.fadeIn();
+		this.position(this, event, AnyValue);
+		this.menu.fadeIn(this);
+		// добовляем событие на скрытие меню при клике в другую область
 		setTimeout(() => {
-			$('body').on('click', function () { self.hide() })
-		}, 200);
+			$('body').on('click', function () { self.hide() });
+		}, 500);
 
 	}
 	hide(event) {

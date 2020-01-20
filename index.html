@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,28 +10,51 @@
 	<link rel="stylesheet" href="SCM.css">
 	<script src="SCM.js"></script>
 </head>
+
 <body>
 
 	<h2 id="test">Нажми на меня</h2>
+	<h2 id="test2">Нажми на меня2</h2>
 	<input type="text" oncontextmenu="test.show(event,$(this).val());return false">
-	
+
 </body>
 <script>
-test = new SCM([
-	{item:'test1',function:function (e,self,AnyValue) {
-		console.log(e,self,AnyValue);
-	}},
-	{item:'test2',function:function (e,self,AnyValue) {
-		console.warn(e,self,AnyValue);
-	}},
-	{item:'test3',function:function (e,self,AnyValue) {
-		console.error(e,self,AnyValue);
-	}},
-])
-$('#test').on('click',
-function (event) {
-	test.show(event);
-}
-)
+	test = new SCM([
+		{
+			item: 'test1', function: function (e, self, AnyValue) {
+				console.log(e, self, AnyValue);
+			}
+		},
+		{
+			item: 'test2', function: function (e, self, AnyValue) {
+				console.warn(e, self, AnyValue);
+			}
+		},
+		{
+			item: 'test3', function: function (e, self, AnyValue) {
+				console.error(e, self, AnyValue);
+			}
+		},
+	])
+	test2 = new SCM([
+		{
+			item: 'test1', function: function (e, self, AnyValue) {
+				console.log(e, self, AnyValue);
+			}
+		},
+	], (self, event, AnyValue) => {
+		self.menu.offset({ top: 10, left: 10 })
+	})
+	$('#test').on('click',
+		function (event) {
+			test.show(event);
+		}
+	)
+	$('#test2').on('click',
+		function (event) {
+			test2.show(event);
+		}
+	)
 </script>
+
 </html>
