@@ -2,7 +2,6 @@
 // 	{item:'itemName',title:'title',function:function(){}}
 // ]
 class SCM {
-
 	constructor(list = [], position = null) {
 		if (position) {
 			this.position = position;
@@ -11,6 +10,7 @@ class SCM {
 		this.menu;
 		this.ul;
 		this.li = {};
+		this.status = 0;
 		if (this.list) {
 			this.init();
 		}
@@ -64,6 +64,10 @@ class SCM {
 		});
 	}
 	show(event, AnyValue = {}) {
+		if (this.status == 1) {
+			return;
+		}
+		this.status = 1;
 		var self = this;
 		if (!this.menu) {
 			console.warn('меню не обнаружено попробуйте добавить саписок либо вызвать функуцию init()');
@@ -82,6 +86,10 @@ class SCM {
 
 	}
 	hide(event) {
+		if (this.status == 0) {
+			return;
+		}
+		this.status = 0;
 		var self = this;
 		if (!this.menu) {
 			console.warn('меню не обнаружено попробуйте добавить саписок либо вызвать функуцию init()');
