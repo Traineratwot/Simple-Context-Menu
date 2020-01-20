@@ -7,79 +7,81 @@ class SCM {
 
 		this.list = list;
 		this.menu;
-		this.ul
+		this.ul;
 		this.li = {};
 		if (this.list) {
-			this.init()
+			this.init();
 		}
 		var self = this;
-		$(document).on('mousemove',function (event) {
-			self.Mouse(event)
+		$(document).on('mousemove', function (event) {
+			self.Mouse(event);
 		})
 	}
-	Mouse(e){
+	Mouse(e) {
 		this.event = e;
 	}
-	addItem(item = {}){
+	addItem(item = {}) {
 		this.list.push(item);
 		if (this.list) {
-			this.init()
+			this.init();
 		}
 	}
 	setList(list = []) {
 		this.list = list;
 		if (this.list) {
-			this.init()
+			this.init();
 		}
 	}
-	setup(){
-		show()
-
-	}
-	init(){
+	init() {
 		var self = this;
 		this.menu = $('<div class="SCM">');
 		this.menu.css({
-			display:'none',
-			position:'absolute',
+			display: 'none',
+			position: 'absolute',
 		})
 		this.ul = $('<ul>').appendTo(this.menu);
 		for (const key in this.list) {
 			if (this.list.hasOwnProperty(key)) {
 				const e = this.list[key];
-				var li = $('<li class="SCM">')
-				li.html(e.item)
-				li.on('click',function (params) {
-					self.list[key].function(e,self,self.AnyValue)
+				var li = $('<li class="SCM">');
+				li.html(e.item);
+				li.on('click', function (params) {
+					self.list[key].function(e, self, self.AnyValue)
 					self.hide()
-				})
-				this.li[key] = li
-				li.appendTo(this.ul)
+				});
+				this.li[key] = li;
+				li.appendTo(this.ul);
 			}
 		}
 		$('body').append(this.menu);
 	}
-	show(event,AnyValue={}){
+	show(event, AnyValue = {}) {
+		var self = this;
 		if (!this.menu) {
 			console.warn('меню не обнаружено попробуйте добавить саписок либо вызвать функуцию init()');
 			return true;
 		}
-		if(!$.isEmptyObject(event)){
-			this.event = event
+		if (!$.isEmptyObject(event)) {
+			this.event = event;
 		}
-		this.AnyValue = AnyValue
+		this.AnyValue = AnyValue;
 		this.menu.offset({
 			top: this.event.pageY,
 			left: this.event.pageX
 		});
 		this.menu.fadeIn();
-		
+		setTimeout(() => {
+			$('body').on('click', function () { self.hide() })
+		}, 200);
+
 	}
-	hide(event){
+	hide(event) {
+		var self = this;
 		if (!this.menu) {
 			console.warn('меню не обнаружено попробуйте добавить саписок либо вызвать функуцию init()');
 			return true;
 		}
+		$('body').unbind('click');
 		this.menu.fadeOut();
 		this.menu.offset({
 			top: -9999,
@@ -87,7 +89,7 @@ class SCM {
 		});
 		this.menu.fadeIn(0);
 	}
-	remove(){
+	remove() {
 		for (const key in this.li) {
 			if (this.li.hasOwnProperty(key)) {
 				const e = this.li[key];
@@ -99,5 +101,5 @@ class SCM {
 		this.ul = null;
 		this.li = null;
 	}
-	
+
 }
