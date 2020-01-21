@@ -65,7 +65,11 @@ class SCM {
 	}
 	show(event, AnyValue = {}) {
 		if (this.status == 1) {
-			return;
+			if (AnyValue != this.AnyValue) {
+				this.hide()
+			} else {
+				return;
+			}
 		}
 		this.status = 1;
 		var self = this;
