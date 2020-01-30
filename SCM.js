@@ -14,13 +14,18 @@ class SCM {
 		if (this.list) {
 			this.init();
 		}
+		self.events = {};
 		var self = this;
-		$(document).on('mousemove', function (event) {
+		$(document).on('mousemove touchmove', function (event) {
 			self.Mouse(event);
 		})
 	}
 	Mouse(e) {
 		this.event = e;
+		if (e.touches) {
+			this.event.clientX = event.touches[0].clientX;
+			this.event.clientY = event.touches[0].clientY;
+		}
 	}
 	addItem(item = {}) {
 		this.list.push(item);
@@ -47,8 +52,8 @@ class SCM {
 				const e = this.list[key];
 				var li = $('<li class="SCM">');
 				li.html(e.item);
-				li.on('click', function (params) {
-					self.list[key].function(e, self, self.AnyValue)
+				li.on('click touchend', function (params) {
+					self.list[key].function(e, self, self.AnyValue);
 					self.hide()
 				});
 				this.li[key] = li;
@@ -85,21 +90,24 @@ class SCM {
 		this.menu.fadeIn(this);
 		// добовляем событие на скрытие меню при клике в другую область
 		setTimeout(() => {
-			$('body').on('click', function () { self.hide() });
+			$('body').on('click touchend', function (event) {
+				self.events.body = event;
+				self.hide()
+			});
 		}, 500);
 
 	}
 	hide(event) {
+		var self = this;
 		if (this.status == 0) {
 			return;
 		}
 		this.status = 0;
-		var self = this;
 		if (!this.menu) {
 			console.warn('меню не обнаружено попробуйте добавить саписок либо вызвать функуцию init()');
 			return true;
 		}
-		$('body').unbind('click');
+		$('body').unbind(self.events.body);
 		this.menu.fadeOut();
 		this.menu.offset({
 			top: -9999,
