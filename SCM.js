@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 // [
 // 	{item:'itemName',title:'title',function:function(){}}
 // ]
@@ -18,7 +19,7 @@ class SCM {
 		var self = this;
 		$(document).on('mousemove touchmove', function (event) {
 			self.Mouse(event);
-		})
+		});
 	}
 	Mouse(e) {
 		this.event = e;
@@ -71,7 +72,7 @@ class SCM {
 	show(event, AnyValue = {}) {
 		if (this.status == 1) {
 			if (AnyValue != this.AnyValue) {
-				this.hide()
+				this.hide();
 			} else {
 				return;
 			}
@@ -92,7 +93,7 @@ class SCM {
 		setTimeout(() => {
 			$('body').on('click touchend', function (event) {
 				self.events.body = event;
-				self.hide()
+				self.hide();
 			});
 		}, 500);
 
@@ -122,7 +123,7 @@ class SCM {
 				e.unbind('click');
 			}
 		}
-		this.menu.remove()
+		this.menu.remove();
 		this.menu = null;
 		this.ul = null;
 		this.li = null;
