@@ -4,6 +4,7 @@
 // ]
 class SCM {
 	constructor(list = [], position = null) {
+		var self = this;
 		if (position) {
 			this.position = position;
 		}
@@ -15,8 +16,7 @@ class SCM {
 		if (this.list) {
 			this.init();
 		}
-		self.events = {};
-		var self = this;
+		this.events = {};
 		$(document).on('mousemove touchmove', function (event) {
 			self.Mouse(event);
 		});
@@ -33,12 +33,14 @@ class SCM {
 		if (this.list) {
 			this.init();
 		}
+		return this;
 	}
 	setList(list = []) {
 		this.list = list;
 		if (this.list) {
 			this.init();
 		}
+		return this;
 	}
 	init() {
 		var self = this;
@@ -62,12 +64,14 @@ class SCM {
 			}
 		}
 		$('body').append(this.menu);
+		return this;
 	}
 	position(self, event, AnyValue) {
 		this.menu.offset({
 			top: this.event.pageY,
 			left: this.event.pageX
 		});
+		return this;
 	}
 	show(event, AnyValue = {}) {
 		if (this.status == 1) {
@@ -96,7 +100,7 @@ class SCM {
 				self.hide();
 			});
 		}, 500);
-
+		return this;
 	}
 	hide(event) {
 		var self = this;
@@ -115,6 +119,7 @@ class SCM {
 			left: -9999
 		});
 		this.menu.fadeIn(0);
+		return this;
 	}
 	remove() {
 		for (const key in this.li) {
